@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Business Card</string>
+    <string name="my_name">Vittorio Sassu</string>
+    <string name="my_job_title">Aspiring Android Developer</string>
+    <string name="my_phone_number">000–000000</string>
+    <string name="my_social">\@vickysX</string>
+    <string name="my_email">vickysX@mail.com</string>
 </resources>

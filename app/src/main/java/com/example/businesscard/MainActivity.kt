@@ -4,18 +4,18 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.businesscard.ui.theme.BusinessCardTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,23 +44,89 @@ fun Greeting(name: String) {
 fun Card() {
     Surface(color = Color.Blue) {
         Column {
-            Row() {
-               Column() {
-                   Image(
-                        painter = painterResource(id = R.drawable.android_logo),
-                        contentDescription = "android logo"
-                   )
-                   Text(text = "myName")
-                   Text(text = "myJobTitle")
-               }
-            }
-            Row() {
-                Column {
-                    Contact(R.drawable.ic_contact_phone, "myPhone")
-                    Contact(R.drawable.ic_share, "mySocial")
-                    Contact(R.drawable.ic_contact_mail, "myEmailAddress")
-                }
-            }
+            UpperPart()
+            LowerPart()
+        }
+    }
+}
+
+@Composable
+fun UpperPart() {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(
+            top = 150.dp,
+            bottom = 150.dp
+        )
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.padding(
+                start = 16.dp,
+                end = 16.dp,
+                bottom = 25.dp
+            )
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.android_logo),
+                contentDescription = "android logo",
+                modifier = Modifier.padding(
+                    start = 100.dp,
+                    top = 25.dp,
+                    end = 100.dp
+                )
+            )
+            Text(
+                text = stringResource(R.string.my_name),
+                color = Color.White,
+                fontSize = 50.sp,
+                fontWeight = FontWeight.Thin
+            )
+            Text(
+                text = stringResource(R.string.my_job_title),
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF3ddc84)
+            )
+        }
+    }
+}
+
+@Composable
+fun LowerPart() {
+    Row(
+        verticalAlignment = Alignment.Bottom
+    ) {
+        Column {
+            Divider(
+                modifier = Modifier.height(1.dp),
+                color = Color.White
+            )
+            Contact(
+                R.drawable.ic_contact_phone,
+                stringResource(R.string.my_phone_number)
+            )
+            Divider(
+                modifier = Modifier.height(1.dp),
+                color = Color.White
+            )
+            Contact(
+                R.drawable.ic_share,
+                stringResource(R.string.my_social)
+            )
+            Divider(
+                modifier = Modifier.height(1.dp),
+                color = Color.White
+            )
+            Contact(
+                R.drawable.ic_contact_mail,
+                stringResource(R.string.my_email)
+            )
+            Divider(
+                modifier = Modifier.height(1.dp),
+                color = Color.White
+            )
         }
     }
 }
@@ -70,16 +136,31 @@ fun Contact(
     iconId: Int,
     contact: String
 ) {
-    Row() {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentWidth(Alignment.CenterHorizontally)
+
+    ) {
         Icon(
             painter = painterResource(id = iconId),
-            contentDescription = null
+            contentDescription = null,
+            tint = Color(0xFF3ddc84)
         )
-        Text(text = contact)
+        Spacer(modifier = Modifier.width(20.dp))
+        Text(
+            text = contact,
+            color = Color.White
+        )
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    showSystemUi = true
+)
 @Composable
 fun DefaultPreview() {
     BusinessCardTheme {
